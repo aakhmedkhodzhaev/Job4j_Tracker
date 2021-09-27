@@ -70,7 +70,6 @@ public class HqlRun {
                     + "from Candidate s where s.id = :fId")
                     .setParameter("fId", Long.valueOf(2))
                     .executeUpdate();
-                    session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
