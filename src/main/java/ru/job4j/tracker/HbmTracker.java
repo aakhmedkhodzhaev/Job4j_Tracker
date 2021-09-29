@@ -21,7 +21,7 @@ public class HbmTracker implements Store, AutoCloseable {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(item); // item.setId(1); item.setName("Vasya");
+            session.save(item);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -33,6 +33,7 @@ public class HbmTracker implements Store, AutoCloseable {
         }
         return item;
     }
+
     @Override
     public boolean replace(String id, Item item) {
         Session session = sf.openSession();
@@ -41,7 +42,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             int itemId = Integer.parseInt(id);
             transaction = session.beginTransaction();
-            item = session.get(Item.class, itemId); item.setId(itemId);
+            item = session.get(Item.class, itemId);
             session.update(item);
             transaction.commit();
             result = true;
@@ -133,7 +134,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             int itemId = Integer.parseInt(id);
             transaction = session.beginTransaction();
-            item = session.get(Item.class, itemId);
+            item = session.get(Item.class, itemId); // session.load(Item.class, itemId);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
