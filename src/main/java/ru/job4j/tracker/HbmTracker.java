@@ -134,7 +134,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             int itemId = Integer.parseInt(id);
             transaction = session.beginTransaction();
-            item = session.get(Item.class, itemId); // session.load(Item.class, itemId);
+            item = session.get(Item.class, itemId);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
