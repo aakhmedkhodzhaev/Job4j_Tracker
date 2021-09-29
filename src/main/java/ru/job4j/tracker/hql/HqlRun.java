@@ -23,7 +23,7 @@ public class HqlRun {
             session.save(one);
             session.save(two);
             session.save(three);
-            session.getTransaction().commit();*/
+            session.getTransaction().commit(); */
 
             Query query = session.createQuery("from Candidate ");
             for (Object cd : query.list()) {
@@ -64,10 +64,14 @@ public class HqlRun {
                 System.out.println(cd);
             }
 
+            Query selectByName = session.createQuery("from Candidate c where c.name = :newName");
+            selectByName.setParameter("newName", "Petr");
+            System.out.println(selectByName.uniqueResult());
+
             session.createQuery(
                     "insert into Candidate (name, experience, salary) "
-                    + "select 'Vasiliy', s.experience + 1, 175000 "
-                    + "from Candidate s where s.id = :fId")
+                            + "select 'Vasiliy', s.experience + 1, 175000 "
+                            + "from Candidate s where s.id = :fId")
                     .setParameter("fId", Long.valueOf(2))
                     .executeUpdate();
         } catch (Exception e) {
