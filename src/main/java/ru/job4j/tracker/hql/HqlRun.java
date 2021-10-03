@@ -66,7 +66,7 @@ public class HqlRun {
 
             Query selectByName = session.createQuery("from Candidate c where c.name = :newName");
             selectByName.setParameter("newName", "Petr");
-            System.out.println(selectByName.uniqueResult());
+            System.out.println(selectByName.list());
 
             session.createQuery(
                     "insert into Candidate (name, experience, salary) "
